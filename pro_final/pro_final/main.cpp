@@ -218,7 +218,7 @@ void InitGL(GLvoid)     // Inicializamos parametros
 	glEnable(GL_AUTO_NORMAL);
 	glEnable(GL_NORMALIZE);
 
-	text1.LoadBMP("01.bmp");
+	text1.LoadBMP("cielo.bmp");
 	text1.BuildGLTexture();
 	text1.ReleaseImage();
 
@@ -295,7 +295,7 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glPushMatrix(); //Creamos cielo
 	glDisable(GL_LIGHTING);
 	glTranslatef(0, 60, 0);
-	fig1.skybox(130.0, 130.0, 130.0, text1.GLindex);
+	fig1.skybox(200.0, 200.0, 200.0, text1.GLindex);
 	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
@@ -347,7 +347,7 @@ void reshape(int width, int height)   // Creamos funcion Reshape
 
 	// Tipo de Vista
 
-	glFrustum(-0.1, 0.1, -0.1, 0.1, 0.1, 170.0);
+	glFrustum(-0.1, 0.1, -0.1, 0.1, 0.1, 300.0);
 
 	glMatrixMode(GL_MODELVIEW);							// Seleccionamos Modelview Matrix
 	glLoadIdentity();
