@@ -1,0 +1,12 @@
+﻿CModel.lib(_3dsloader.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(_3dsloader.obj)' or at 'C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(CModel.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(CModel.obj)' or at 'C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(CObject.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(CObject.obj)' or at 'C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(GFILoader.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(GFILoader.obj)' or at 'C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(GLRender.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(GLRender.obj)' or at 'C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(HandleStream.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(HandleStream.obj)' or at 'C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(imageload.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(imageload.obj)' or at 'C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(MATRIX4X4.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(MATRIX4X4.obj)' or at 'C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(VECTOR3D.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(VECTOR3D.obj)' or at 'C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(VECTOR4D.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(VECTOR4D.obj)' or at 'C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\vc70.pdb'; linking object as if no debug info
+  clase.vcxproj -> C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\clase.exe
+  clase.vcxproj -> C:\Users\Marco\Desktop\MAGC_CLASE\clase\Debug\clase.pdb (Full PDB)
