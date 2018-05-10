@@ -35,6 +35,7 @@ GLfloat Position2[] = { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 
 CTexture text1;
 CTexture t_pasto;
+CTexture t_nubes;
 
 
 CFiguras cubo;
@@ -105,6 +106,10 @@ void InitGL(GLvoid)     // Inicializamos parametros
 	t_pasto.BuildGLTexture();
 	t_pasto.ReleaseImage();
 
+	t_nubes.LoadTGA("nube.tga");
+	t_nubes.BuildGLTexture();
+	t_nubes.ReleaseImage();
+
 	//END NEW//////////////////////////////
 
 	objCamera.Position_Camera(0, 2.5f, 3, 0, 2.5f, 0, 0, 1, 0);
@@ -148,6 +153,18 @@ void display(void)   // Creamos la funcion donde se dibuja
 	fig3.prisma2(t_pasto.GLindex, t_pasto.GLindex);
 	glEnable(GL_LIGHTING);
 	glPopMatrix();
+
+	//nubes
+
+	glPushMatrix();
+	glDisable(GL_LIGHTING);
+	glTranslatef(0, 40, 0.0);
+	glScalef(200, .1, 200);
+	glDisable(GL_LIGHTING);
+	fig3.prisma2(t_nubes.GLindex, t_nubes.GLindex);
+	glEnable(GL_LIGHTING);
+	glPopMatrix();
+
 
 
 
