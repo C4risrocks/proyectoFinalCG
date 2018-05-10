@@ -34,15 +34,8 @@ GLfloat Position[] = { 0.0f, 7.0f, -5.0f, 0.0f };			// Light Position
 GLfloat Position2[] = { 0.0f, 0.0f, -5.0f, 1.0f };			// Light Position
 
 CTexture text1;
-CTexture text2;
-CTexture text3;	//Flecha
-CTexture text4;	//Pavimento
-CTexture text5;	//Pasto01
-CTexture text6;	//Casa01
+CTexture t_pasto;
 
-CTexture tree;
-CTexture edificio;
-CTexture logo2;
 
 CFiguras cubo;
 CFiguras sky;
@@ -58,123 +51,9 @@ CFiguras fig5;	//Casa01
 CFiguras fig6;
 CFiguras fig7;	//Para crear Monito
 
-void ciudad()
-{
 
-	glPushMatrix(); //Camino1
-	glTranslatef(23.5, 0.0, 0.0);
-	glScalef(40, 0.1, 7);
-	glDisable(GL_LIGHTING);
-	fig3.prisma2(text4.GLindex, 0);
-	glEnable(GL_LIGHTING);
-	glPopMatrix();
 
-	glPushMatrix(); //Camino2
-	glTranslatef(-23.5, 0.0, 0.0);
-	glScalef(40, 0.1, 7);
-	glDisable(GL_LIGHTING);
-	fig3.prisma2(text4.GLindex, 0);
-	glEnable(GL_LIGHTING);
-	glPopMatrix();
 
-	glPushMatrix(); //Pasto
-	glTranslatef(0.0, 0.0, -4.0);
-	glScalef(87, 0.1, 1);
-	glDisable(GL_LIGHTING);
-	fig4.prisma2(text5.GLindex, 0);
-	glEnable(GL_LIGHTING);
-	glPopMatrix();
-
-	glPushMatrix(); //Pasto
-	glTranslatef(0.0, 0.0, 4.0);
-	glScalef(87, 0.1, 1);
-	glDisable(GL_LIGHTING);
-	fig4.prisma2(text5.GLindex, 0);
-	glEnable(GL_LIGHTING);
-	glPopMatrix();
-
-	glPushMatrix(); //Casa01
-	glTranslatef(0.0, 3.0, 7.0);
-	glRotatef(90, 1, 0, 0);
-	glRotatef(180, 0, 0, 1);
-	glScalef(6, 5.0, 6);
-	glDisable(GL_LIGHTING);
-	fig5.prisma2(text6.GLindex, 0);
-	glEnable(GL_LIGHTING);
-	glPopMatrix();
-
-	glPushMatrix(); //Casa01
-	glTranslatef(0.0, 3.0, -7.0);
-	glRotatef(90, 1, 0, 0);
-	//glRotatef(180,0,0,1);
-	glScalef(6, 5.0, 6);
-	glDisable(GL_LIGHTING);
-	fig5.prisma2(text6.GLindex, 0);
-	glEnable(GL_LIGHTING);
-	glPopMatrix();
-}
-
-void arbol()
-{
-	glPushMatrix();
-	glDisable(GL_LIGHTING);
-	glEnable(GL_ALPHA_TEST);
-	//glDisable(GL_DEPTH_TEST);   // Turn Depth Testing Off
-	glAlphaFunc(GL_GREATER, 0.1);
-	//glEnable(GL_BLEND);     // Turn Blending On
-	//glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
-	glBindTexture(GL_TEXTURE_2D, tree.GLindex);
-	glBegin(GL_QUADS); //plano
-	glColor3f(1.0, 1.0, 1.0);
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-10.0, 0.0, 0.0);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(10.0, 0.0, 0.0);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(10.0, 20.0, 0.0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-10.0, 20.0, 0.0);
-	glEnd();
-	glPopMatrix();
-
-	glPushMatrix();
-	glRotatef(45, 0, 1, 0);
-	glBegin(GL_QUADS); //plano
-	glColor3f(1.0, 1.0, 1.0);
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-10.0, 0.0, 0.0);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(10.0, 0.0, 0.0);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(10.0, 20.0, 0.0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-10.0, 20.0, 0.0);
-	glEnd();
-	glPopMatrix();
-
-	glPushMatrix();
-	glRotatef(-45, 0, 1, 0);
-	glBegin(GL_QUADS); //plano
-	glColor3f(1.0, 1.0, 1.0);
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-10.0, 0.0, 0.0);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(10.0, 0.0, 0.0);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(10.0, 20.0, 0.0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-10.0, 20.0, 0.0);
-	glEnd();
-	glPopMatrix();
-
-	glPushMatrix();
-	glRotatef(90, 0, 1, 0);
-	glBegin(GL_QUADS); //plano
-	glColor3f(1.0, 1.0, 1.0);
-	glNormal3f(0.0f, 0.0f, 1.0f);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-10.0, 0.0, 0.0);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(10.0, 0.0, 0.0);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(10.0, 20.0, 0.0);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-10.0, 20.0, 0.0);
-	glEnd();
-	glDisable(GL_ALPHA_TEST);
-	//glDisable(GL_BLEND);        // Turn Blending Off
-	//glEnable(GL_DEPTH_TEST);    // Turn Depth Testing On
-	glEnable(GL_LIGHTING);
-
-	glPopMatrix();
-}
 
 GLuint createDL()
 {
@@ -187,7 +66,7 @@ GLuint createDL()
 	glNewList(ciudadDL, GL_COMPILE);
 	// call the function that contains 
 	// the rendering commands
-	ciudad();
+
 	//monito();
 	// endList
 	glEndList();
@@ -222,38 +101,9 @@ void InitGL(GLvoid)     // Inicializamos parametros
 	text1.BuildGLTexture();
 	text1.ReleaseImage();
 
-	text2.LoadBMP("logopumas.bmp");
-	text2.BuildGLTexture();
-	text2.ReleaseImage();
-
-	text3.LoadTGA("city/arrow.tga");
-	text3.BuildGLTexture();
-	text3.ReleaseImage();
-
-	text4.LoadTGA("city/pavimento.tga");
-	text4.BuildGLTexture();
-	text4.ReleaseImage();
-
-	text5.LoadTGA("city/pasto01.tga");
-	text5.BuildGLTexture();
-	text5.ReleaseImage();
-
-	text6.LoadTGA("city/casa01.tga");
-	text6.BuildGLTexture();
-	text6.ReleaseImage();
-
-
-	tree.LoadTGA("tree01.tga");
-	tree.BuildGLTexture();
-	tree.ReleaseImage();
-
-	edificio.LoadTGA("edificio.tga");
-	edificio.BuildGLTexture();
-	edificio.ReleaseImage();
-
-	logo2.LoadTGA("logopumas.tga");
-	logo2.BuildGLTexture();
-	logo2.ReleaseImage();
+	t_pasto.LoadTGA("pasto.tga");
+	t_pasto.BuildGLTexture();
+	t_pasto.ReleaseImage();
 
 	//END NEW//////////////////////////////
 
@@ -264,17 +114,7 @@ void InitGL(GLvoid)     // Inicializamos parametros
 
 }
 
-void pintaTexto(float x, float y, float z, void *font, char *string)
-{
 
-	char *c;     //Almacena los caracteres a escribir
-	glRasterPos3f(x, y, z);	//Posicion apartir del centro de la ventana
-							//glWindowPos2i(150,100);
-	for (c = string; *c != '\0'; c++) //Condicion de fin de cadena
-	{
-		glutBitmapCharacter(font, *c); //imprime
-	}
-}
 
 void display(void)   // Creamos la funcion donde se dibuja
 {
@@ -299,14 +139,16 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
+	//pasto
+	glPushMatrix();
+	glDisable(GL_LIGHTING);
+	glTranslatef(0, -40, 0.0);
+	glScalef(200, .1, 200);
+	glDisable(GL_LIGHTING);
+	fig3.prisma2(t_pasto.GLindex, t_pasto.GLindex);
+	glEnable(GL_LIGHTING);
+	glPopMatrix();
 
-
-
-	glEnable(GL_COLOR_MATERIAL);
-	/*glPushMatrix();
-	glTranslatef(-30, 0, 10);
-	arbol();
-	glPopMatrix();*/
 
 
 	glColor3f(1.0, 1.0, 1.0);

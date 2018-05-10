@@ -1,11 +1,8 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (clase.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  texture.cpp
-  main.cpp
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (clase.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   figuras.cpp
-c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\figuras.cpp(20): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\figuras.cpp(90): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
-c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\figuras.cpp(301): warning C4101: 'theta': unreferenced local variable
-c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\figuras.cpp(301): warning C4101: 'phi': unreferenced local variable
-  Camera.cpp
-  Generating Code...
-  pro_final.vcxproj -> C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\pro_final.exe
+c:\users\marco\desktop\proyectofinallabcg\pro_final\pro_final\figuras.cpp(20): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+c:\users\marco\desktop\proyectofinallabcg\pro_final\pro_final\figuras.cpp(90): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+c:\users\marco\desktop\proyectofinallabcg\pro_final\pro_final\figuras.cpp(301): warning C4101: 'theta': unreferenced local variable
+c:\users\marco\desktop\proyectofinallabcg\pro_final\pro_final\figuras.cpp(301): warning C4101: 'phi': unreferenced local variable
+  pro_final.vcxproj -> C:\Users\Marco\Desktop\proyectoFinalLabCG\pro_final\Debug\pro_final.exe
+  pro_final.vcxproj -> C:\Users\Marco\Desktop\proyectoFinalLabCG\pro_final\Debug\pro_final.pdb (Full PDB)

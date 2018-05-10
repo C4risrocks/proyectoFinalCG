@@ -210,9 +210,9 @@ void CFiguras::prisma2 (GLuint text, GLuint text2)  //Funcion creacion prisma
 		glBegin(GL_POLYGON);  //Top
 			//glColor3f(0.8,0.2,0.4);
 			glNormal3f( 0.0f,1.0f, 0.0f);
-			glTexCoord2f(1.0f, 0.0f); glVertex3fv(vertice[4]);
-			glTexCoord2f(1.0f, 1.0f); glVertex3fv(vertice[5]);
-			glTexCoord2f(0.0f, 1.0f); glVertex3fv(vertice[6]);
+			glTexCoord2f(3.0f, 0.0f); glVertex3fv(vertice[4]);
+			glTexCoord2f(3.0f, 3.0f); glVertex3fv(vertice[5]);
+			glTexCoord2f(0.0f, 3.0f); glVertex3fv(vertice[6]);
 			glTexCoord2f(0.0f, 0.0f); glVertex3fv(vertice[7]);
 		glEnd();
 }
