@@ -13,7 +13,7 @@
 #include "cmodel/CModel.h"	//PERMITE TEXTURAS EN 3D
 #include "iostream"
 #include "cstdlib"
-//#include <string>
+#include <cstring>
 
 //Bibliotecas de OpenAL para reproducción de audio.
 #include "al.h" 
@@ -21,6 +21,9 @@
 
 using namespace std;
 static GLuint ciudad_display_list;
+
+float angVoodoo = 0.0;
+float angCanoa = 0.0;
 
 //keyframe
 
@@ -114,6 +117,8 @@ CModel kiosko;
 
 
 
+
+
 int endWithError(char* msg, int error = 0) {
 	//Muestra mensaje de error en la consola
 	cout << msg << "\n";
@@ -121,7 +126,7 @@ int endWithError(char* msg, int error = 0) {
 	return error;
 }
 
-char lecturaDataAudio(void) {
+/*char openALFunc(void) {
 
 	FILE *fp = fopen("WAVE/sound.wav", "rb");
 
@@ -134,7 +139,7 @@ char lecturaDataAudio(void) {
 	DWORD dataSize;
 
 	//Retorno de error en caso de no ser un archivo aceptado
-	fread(type, sizeof(char), 4, fp);
+	/*fread(type, sizeof(char), 4, fp);
 	if (type[0] != 'R' || type[1] != 'I' || type[2] != 'F' || type[3] != 'F')
 		return endWithError("No RIFF");
 
@@ -144,9 +149,9 @@ char lecturaDataAudio(void) {
 
 	fread(type, sizeof(char), 4, fp);
 	if (type[0] != 'f' || type[1] != 'm' || type[2] != 't' || type[3] != ' ')
-		return endWithError("No fmt");
+		return endWithError("No fmt");*/
 
-	//Lectura de los datos del archivo WAVE
+	/*//Lectura de los datos del archivo WAVE
 
 	fread(&chunkSize, sizeof(DWORD), 1, fp);
 	fread(&formatType, sizeof(short), 1, fp);
@@ -156,22 +161,86 @@ char lecturaDataAudio(void) {
 	fread(&bytesPerSample, sizeof(short), 1, fp);
 	fread(&bitsPerSample, sizeof(short), 1, fp);
 
-	fread(type, sizeof(char), 4, fp);
+	/*fread(type, sizeof(char), 4, fp);
 	if (type[0] != 'd' || type[1] != 'a' || type[2] != 't' || type[3] != 'a')
-		return endWithError("Missing DATA");
+		return endWithError("Missing DATA");*/
 
-	fread(&dataSize, sizeof(DWORD), 1, fp);
+	/*fread(&dataSize, sizeof(DWORD), 1, fp);
 
 	//Reservar memoria para la información del sonido
 	//Y reproducción del sonido
 	unsigned char* buf = new unsigned char[dataSize];
 	fread(buf, sizeof(BYTE), dataSize, fp);
 
-}
+	//Creacion de contexto
 
-void initAL(void) {
+	ALCdevice *device;
+	ALCcontext *context;
+	device = alcOpenDevice(NULL);
+	if (!device) return endWithError("no sound device");
+	context = alcCreateContext(device, NULL);
+	alcMakeContextCurrent(context);
+	if (!context) return endWithError("no sound context");
 
-}
+	//Creacion de fuente de emision de sonido
+	ALuint source;
+	ALuint buffer;
+	ALuint frequency = sampleRate;
+	ALuint format = 0;
+	
+	alGenBuffers(1, &buffer);
+	alGenSources(1, &source);
+
+	//Reconocimiento del formato de sonido
+
+	if (bitsPerSample == 8) {
+		if (channels == 1)
+			format = AL_FORMAT_MONO8;
+		else if (channels == 2)
+			format = AL_FORMAT_STEREO8;
+	}
+	else if(bitsPerSample == 16){
+		if (channels == 1)
+			format = AL_FORMAT_MONO16;
+		else if (channels == 2)
+			format = AL_FORMAT_STEREO16;
+	}
+
+	//Informacion leida del buffer
+
+	alBufferData(buffer, format, buf, dataSize, frequency);
+
+	//Posicion y velocidad del sonido de la fuente y del escucha
+
+	ALfloat SourcePos[] = { 0.0f,0.0f,0.0f };
+	ALfloat SourceVel[] = { 0.0f,0.0f,0.0f };
+	ALfloat ListenerPos[] = { 0,0,0 };
+	ALfloat ListenerVel[] = { 0,0,0 };
+	ALfloat ListenerOri[] = { 0,0,0,-1,0 };
+
+	//Valores asociados a alListenerfv() y alSourcei/fv()
+	//Y la fuente asociada al buffer
+
+	//Escuch
+	alListenerfv(AL_POSITION, ListenerPos);
+	alListenerfv(AL_VELOCITY, ListenerVel);
+	alListenerfv(AL_ORIENTATION, ListenerOri);
+
+	//Fuente
+	alSourcei(source, AL_BUFFER, buffer);
+	alSourcei(source, AL_PITCH, 1);
+	alSourcei(source, AL_GAIN, 1);
+	alSourcefv(source, AL_POSITION, SourcePos);
+	alSourcefv(source, AL_VELOCITY, SourceVel);
+	alSourcei(source, AL_LOOPING, AL_FALSE);
+
+	//Reproducir fuente
+	alSourcePlay(source);
+
+
+}*/
+
+
 
 GLuint createDL()
 {
@@ -407,51 +476,178 @@ void soporteMedusa(void) {
 	glPopMatrix();
 }
 
-void estructuraMedusa() {
-	glPushMatrix();
-	//Push Función
-
-	//Columna 1
-	glPushMatrix();
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glPopMatrix();
-
-	//Columna 2
-
-	glPushMatrix();
-	glTranslatef(8, 0, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glTranslatef(0, 4, 0);
-	soporteMedusa();
-	glPopMatrix();
-
-	glPopMatrix();
-	//Pop Función
+void translateMedusa(float x, float y, float z) {
+	glTranslatef(x*4, y*4, z*4);
 }
+
+void columnasMedusa(int length) {
+
+	glPushMatrix();
+	soporteMedusa();
+	for (size_t i = 0; i < length; i++)
+	{
+		glPushMatrix();
+		glTranslated(0, i*4, 0);
+		soporteMedusa();
+		glPopMatrix();
+	
+	}
+
+	glPopMatrix();
+}
+
+void estructuraMedusaTotal(void) {
+	//Push General de la función
+	glPushMatrix();
+	columnasMedusa(5);
+	translateMedusa(1, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+
+	//Primera curva
+
+	translateMedusa(1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(1, 0, -1);
+	columnasMedusa(5);
+
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+
+	//Segunda Curva
+
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(5);
+
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+
+	//Tercera Curva
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(5);//
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(5);
+
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+
+	//Cuarta Curva
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(5);
+
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+
+	//Quinta curva
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, -1);
+	columnasMedusa(5);
+
+	translateMedusa(0, 0, -1);
+	columnasMedusa(5);
+
+
+
+
+
+
+
+
+	//Pop General de la función
+	glPopMatrix();
+}
+
+
+
+
 
 void carroMedusa(void) {
 	glPushMatrix();
@@ -491,6 +687,7 @@ void Voodoo(void) {
 	glTranslatef(28.75, -2, 0);
 	voodoo.prisma(2, 13, 5, NULL);
 	glTranslatef(1.5, 6.5, 0);
+	
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
 	voodoo.cilindro(2.5, 3, 20, NULL);
@@ -498,8 +695,9 @@ void Voodoo(void) {
 	glPopMatrix();
 
 	//Barra Movimiento Principal Voodoo
-	glRotatef(-45, 1, 0, 0);//Rotate de animación del juego
-	glTranslatef(0, 4, 0);
+	
+	glTranslatef(0, 4.5, 0);
+	glRotatef(-angVoodoo, 1, 0, 0);//Rotate de animación del juego
 	glPushMatrix();
 	glTranslated(25.75, -1, 0);
 	glRotatef(90, 0, 0, 1);
@@ -508,6 +706,7 @@ void Voodoo(void) {
 
 
 	//Brazo Izquierdo del Voodoo
+	glTranslated(0, -5, 0);
 	glPushMatrix();
 	voodoo.prisma(1.5, 10, 4, NULL);
 	glTranslated(0.75, -5, 0);
@@ -532,6 +731,7 @@ void Voodoo(void) {
 
 	//Canoa del Voodoo.
 	glPushMatrix();
+	glRotatef(angCanoa, 1, 0, 0);//Rotate de animación del juego
 	voodoo.prisma(23, 1, 5, NULL);
 	glTranslatef(0, -1, 0);
 	voodoo.prisma(21, 1, 3, NULL);
@@ -1087,9 +1287,6 @@ void ninio(void) {
 	fig3.prisma2(0, 0);
 	glPopMatrix();
 
-	//Medusa
-	estructuraMedusa();
-
 
 	//pasto
 	glTranslatef(0, -6, 0);
@@ -1560,10 +1757,12 @@ void pintaTexto(float x, float y, float z, void *font, char *string)
 
 void display(void)   // Creamos la funcion donde se dibuja
 {
+	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
 
+	
 
 	glPushMatrix();
 	glRotatef(g_lookupdown, 1.0f, 0, 0);
@@ -1581,6 +1780,8 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
+	Voodoo();
+
 	//pasto
 	glPushMatrix();
 	glDisable(GL_LIGHTING);
@@ -1588,6 +1789,8 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glScalef(200, .1, 200);
 	fig3.prisma2(t_pasto.GLindex, t_pasto.GLindex);
 	glPopMatrix();
+
+	/*
 
 	//nubes
 
@@ -1652,14 +1855,14 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glTranslatef(20, -39.9, -40);
 	glRotatef(270, 0, 1, 0);
 	glScalef(.05, .05, .05);
-	//asiento.GLrender(NULL, _SHADED, 1.0);
+	asiento.GLrender(NULL, _SHADED, 1.0);
 	glPopMatrix();
 
 	glPushMatrix();
 	glTranslatef(-20, -39.9, -40);
 	glRotatef(90, 0, 1, 0);
 	glScalef(.05, .05, .05);
-	//asiento.GLrender(NULL, _SHADED, 1.0);
+	asiento.GLrender(NULL, _SHADED, 1.0);
 	glPopMatrix();
 
 	glEnable(GL_COLOR_MATERIAL);
@@ -1687,6 +1890,16 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glPopMatrix();
 
 
+	*/
+	glEnable(GL_LIGHTING);
+
+	glPushMatrix();
+	glTranslatef(60, -39.5, 50);
+	//glRotatef(90, 0, 1, 0);
+
+	estructuraMedusaTotal();
+
+	glPopMatrix();
 
 
 	glPopMatrix();
@@ -1707,6 +1920,9 @@ void display(void)   // Creamos la funcion donde se dibuja
 
 void animacion()
 {
+	angVoodoo++;
+	angCanoa = 0;
+
 	fig3.text_izq -= 0.01;
 	fig3.text_der -= 0.01;
 	if (fig3.text_izq<-1)
@@ -1965,7 +2181,7 @@ void arrow_keys(int a_keys, int x, int y)  // Funcion para manejo de teclas espe
 
 int main(int argc, char** argv)   // Main Function
 {
-
+	
 	glutInit(&argc, argv); // Inicializamos OpenGL
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH); // Display Mode (Clores RGB y alpha | Buffer Doble )
 	glutInitWindowSize(500, 500);	// Tamaño de la Ventana
