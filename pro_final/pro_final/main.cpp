@@ -302,25 +302,25 @@ void soporteMedusa(void) {
 	glPushMatrix();
 	glTranslatef(0, 1.75, 0);
 	glRotatef(45, 0, 0, 1);
-	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	medusa.prisma(4.5, 0.5, 0.5, t_metal.GLindex);
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	medusa.prisma(4.5, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glTranslatef(0, 3.5, 0);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 
 	glTranslatef(1.75, -1.75, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
 	glTranslatef(-3.5, 0, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -332,25 +332,25 @@ void soporteMedusa(void) {
 	glPushMatrix();
 	glTranslatef(0, 1.75, 0);
 	glRotatef(45, 0, 0, 1);
-	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	medusa.prisma(4.5, 0.5, 0.5, t_metal.GLindex);
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	medusa.prisma(4.5, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glTranslatef(0, 3.5, 0);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 
 	glTranslatef(1.75, -1.75, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
 	glTranslatef(-3.5, 0, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -365,25 +365,25 @@ void soporteMedusa(void) {
 	glPushMatrix();
 	glTranslatef(0, 1.75, 0);
 	glRotatef(45, 0, 0, 1);
-	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	medusa.prisma(4.5, 0.5, 0.5, t_metal.GLindex);
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	medusa.prisma(4.5, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glTranslatef(0, 3.5, 0);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 
 	glTranslatef(1.75, -1.75, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
 	glTranslatef(-3.5, 0, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -398,25 +398,25 @@ void soporteMedusa(void) {
 	glPushMatrix();
 	glTranslatef(0, 1.75, 0);
 	glRotatef(45, 0, 0, 1);
-	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	medusa.prisma(4.5, 0.5, 0.5, t_metal.GLindex);
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	medusa.prisma(4.5, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glTranslatef(0, 3.5, 0);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 
 	glTranslatef(1.75, -1.75, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
 	glTranslatef(-3.5, 0, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	medusa.prisma(4, 0.5, 0.5, NULL);
+	medusa.prisma(4, 0.5, 0.5, t_metal.GLindex);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -1856,16 +1856,6 @@ void display(void)   // Creamos la funcion donde se dibuja
 	//glRotatef(90, 0, 1, 0);
 
 	estructuraMedusaTotal();
-
-	glPopMatrix();
-	//vodoo
-	glPushMatrix();
-	glTranslatef(40,10,-120);
-	glScalef(4,4,4);
-	glRotatef(270, 0, 1, 0);
-
-	//Voodoo();
-	glPopMatrix();
 
 	glPopMatrix();
 
