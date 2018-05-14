@@ -310,6 +310,7 @@ void soporteMedusa(void) {
 
 	glPushMatrix();
 	glPushMatrix();
+	glColor3f(1,1,1);
 	glTranslatef(0, 1.75, 0);
 	glRotatef(45, 0, 0, 1);
 	medusa.prisma(4.5, 0.5, 0.5, t_metal.GLindex);
@@ -693,9 +694,6 @@ void estructuraMedusaTotal(void) {
 	//Pop General de la función
 	glPopMatrix();
 }
-
-
-
 
 
 void carroMedusa(void) {
@@ -1861,8 +1859,6 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
-	Voodoo();
-
 	//pasto
 	glPushMatrix();
 	glDisable(GL_LIGHTING);
@@ -1870,8 +1866,6 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glScalef(200, .1, 200);
 	fig3.prisma2(t_pasto.GLindex, t_pasto.GLindex);
 	glPopMatrix();
-
-	/*
 
 	//nubes
 
@@ -1890,6 +1884,7 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glScalef(5, 5, 5);
 	fig3.prisma2(t_ladrillo.GLindex, t_ladrillo.GLindex);
 	glPopMatrix();
+
 	//cara de tienda
 	glPushMatrix();
 	glRotatef(90, 1, 0, 0);
@@ -1898,7 +1893,13 @@ void display(void)   // Creamos la funcion donde se dibuja
 	fig3.prisma3(t_ct.GLindex, t_ct.GLindex);
 	glPopMatrix();
 	glPopMatrix();
-
+	// baño
+	glPushMatrix();
+	glTranslatef(-15,-30,45);
+	glRotatef(180, 0, 1, 0);
+	glScalef(0.5,0.5,0.5);
+	banio();
+	glPopMatrix();
 
 	//piso
 	glPushMatrix();
@@ -1907,9 +1908,7 @@ void display(void)   // Creamos la funcion donde se dibuja
 	fig5.prisma3(t_pav.GLindex, 0);
 	glEnable(GL_LIGHTING);
 	glPopMatrix();
-
-
-
+	
 	//3ds
 	//arboles
 	glPushMatrix();
@@ -1933,19 +1932,18 @@ void display(void)   // Creamos la funcion donde se dibuja
 
 	//bancos
 	glPushMatrix();
-	glTranslatef(20, -39.9, -40);
+	glTranslatef(20, -39.9, -60);
 	glRotatef(270, 0, 1, 0);
-	glScalef(.05, .05, .05);
+	glScalef(.03, .03, .03);
 	asiento.GLrender(NULL, _SHADED, 1.0);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-20, -39.9, -40);
+	glTranslatef(-20, -39.9, 68);
 	glRotatef(90, 0, 1, 0);
-	glScalef(.05, .05, .05);
+	glScalef(.03, .03, .03);
 	asiento.GLrender(NULL, _SHADED, 1.0);
 	glPopMatrix();
-
 	glEnable(GL_COLOR_MATERIAL);
 
 	//humanoide
@@ -1955,13 +1953,11 @@ void display(void)   // Creamos la funcion donde se dibuja
 	humanide();
 	glPopMatrix();
 
-
 	glPushMatrix();
 	glTranslatef(-3, -20, 5);
 	//fig5.esfera(2,12,12,0);
 	pelota();
 	glPopMatrix();
-
 	//niño
 	glPushMatrix();
 	glTranslatef(0, -10, 45);
@@ -1970,15 +1966,20 @@ void display(void)   // Creamos la funcion donde se dibuja
 	ninio();
 	glPopMatrix();
 
-	*/
 	glEnable(GL_LIGHTING);
-
+	//medusa
 	glPushMatrix();
-	glTranslatef(60, -39.5, 50);
+	glTranslatef(-90, -20, -50);
 	//glRotatef(90, 0, 1, 0);
-
+	glScalef(1.5,1.5,1.5);
 	estructuraMedusaTotal();
-
+	glPopMatrix();
+	//voodoo
+	glPushMatrix();
+	glTranslatef(35,-26.5,-45);
+	glRotatef(270, 0, 1, 0);
+	glScalef(1.5,1.5,1.5);
+	Voodoo();
 	glPopMatrix();
 
 
