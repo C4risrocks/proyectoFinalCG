@@ -10,10 +10,16 @@
 #include "texture.h"
 #include "figuras.h"
 #include "Camera.h"
-#include "cmodel/CModel.h"		//PERMITE TEXTURAS EN 3D
+#include "cmodel/CModel.h"	//PERMITE TEXTURAS EN 3D
+#include "iostream"
+#include "cstdlib"
+//#include <string>
 
+//Bibliotecas de OpenAL para reproducción de audio.
 #include "al.h" 
 #include "alc.h" 
+
+using namespace std;
 static GLuint ciudad_display_list;
 
 //keyframe
@@ -108,7 +114,64 @@ CModel kiosko;
 
 
 
+int endWithError(char* msg, int error = 0) {
+	//Muestra mensaje de error en la consola
+	cout << msg << "\n";
+	system("PAUSE");
+	return error;
+}
 
+char lecturaDataAudio(void) {
+
+	FILE *fp = fopen("WAVE/sound.wav", "rb");
+
+	//Variables para almacenar informacion del archivo de sonido
+	char type[4];
+	DWORD size, chunkSize;
+	short formatType, channels;
+	DWORD sampleRate, avgBytesPerSec;
+	short bytesPerSample, bitsPerSample;
+	DWORD dataSize;
+
+	//Retorno de error en caso de no ser un archivo aceptado
+	fread(type, sizeof(char), 4, fp);
+	if (type[0] != 'R' || type[1] != 'I' || type[2] != 'F' || type[3] != 'F')
+		return endWithError("No RIFF");
+
+	fread(type, sizeof(DWORD), 1, fp);
+	if (type[0] != 'W' || type[1] != 'A' || type[2] != 'V' || type[3] != 'E')
+		return endWithError("No WAVE");
+
+	fread(type, sizeof(char), 4, fp);
+	if (type[0] != 'f' || type[1] != 'm' || type[2] != 't' || type[3] != ' ')
+		return endWithError("No fmt");
+
+	//Lectura de los datos del archivo WAVE
+
+	fread(&chunkSize, sizeof(DWORD), 1, fp);
+	fread(&formatType, sizeof(short), 1, fp);
+	fread(&channels, sizeof(short), 1, fp);
+	fread(&sampleRate, sizeof(DWORD), 1, fp);
+	fread(&avgBytesPerSec, sizeof(DWORD), 1, fp);
+	fread(&bytesPerSample, sizeof(short), 1, fp);
+	fread(&bitsPerSample, sizeof(short), 1, fp);
+
+	fread(type, sizeof(char), 4, fp);
+	if (type[0] != 'd' || type[1] != 'a' || type[2] != 't' || type[3] != 'a')
+		return endWithError("Missing DATA");
+
+	fread(&dataSize, sizeof(DWORD), 1, fp);
+
+	//Reservar memoria para la información del sonido
+	//Y reproducción del sonido
+	unsigned char* buf = new unsigned char[dataSize];
+	fread(buf, sizeof(BYTE), dataSize, fp);
+
+}
+
+void initAL(void) {
+
+}
 
 GLuint createDL()
 {
@@ -1702,7 +1765,7 @@ void animacion()
 	glutPostRedisplay();
 }
 
-/*void animacion2()
+void animacion2()
 {
 fig3.text_izq -= 0.01;
 fig3.text_der -= 0.01;
@@ -1762,7 +1825,7 @@ frame = 0;
 glutPostRedisplay();
 }
 
-*/
+
 void reshape(int width, int height)   // Creamos funcion Reshape
 {
 	if (height == 0)										// Prevenir division entre cero
