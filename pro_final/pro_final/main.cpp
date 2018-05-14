@@ -95,6 +95,8 @@ CTexture t_pelota;
 CTexture t_madera;
 CTexture t_metal;
 CTexture t_carrito;
+CTexture t_yeso;
+CTexture t_entba;
 
 
 CFiguras cubo;
@@ -260,6 +262,14 @@ void InitGL(GLvoid)     // Inicializamos parametros
 	t_carrito.LoadTGA("frenteCarritoMedusa.tga");
 	t_carrito.BuildGLTexture();
 	t_carrito.ReleaseImage();
+
+	t_yeso.LoadTGA("texba.tga");
+	t_yeso.BuildGLTexture();
+	t_yeso.ReleaseImage();
+
+	t_entba.LoadTGA("banio.tga");
+	t_entba.BuildGLTexture();
+	t_entba.ReleaseImage();
 
 
 	//3ds carga
@@ -1774,6 +1784,29 @@ void ninio(void) {
 	glPopMatrix();
 	glPopMatrix();
 	glPopMatrix();
+
+}
+
+void banio(void) {
+
+	glPushMatrix();
+	//glTranslatef(23, -30, 45);
+	glColor3f(1, 1, 1);
+	glScalef(5, 5, 5);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	glScalef(5, 5, 5);
+	fig3.prisma2(t_yeso.GLindex, t_yeso.GLindex);
+	glPopMatrix();
+	//
+	glPushMatrix();
+	glRotatef(90, 1, 0, 0);
+	glTranslatef(-2.5, 0, 0);
+	glScalef(.1, 5, 5);
+	fig3.prisma3(t_entba.GLindex, t_entba.GLindex);
+	glPopMatrix();
+	glPopMatrix();
+
 
 }
 
