@@ -458,185 +458,187 @@ void columnasMedusa(int length) {
 }
 
 void estructuraMedusaTotal(void) {
+	
 	//Push General de la función
 	glPushMatrix();
+	
 	columnasMedusa(5);
 	translateMedusa(1, 0, 0);
 	columnasMedusa(5);
 	translateMedusa(2, 0, 0);
 	columnasMedusa(5);
 	translateMedusa(2, 0, 0);
-	columnasMedusa(5);
+	columnasMedusa(6);
 
 	//Primera curva
 
 	translateMedusa(1, 0, -1);
-	columnasMedusa(5);
+	columnasMedusa(7);
 	translateMedusa(1, 0, -1);
-	columnasMedusa(5);
+	columnasMedusa(8);
 
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(9);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(10);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(11);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(12);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(13);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(14);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(15);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(16);
 
 	//Segunda Curva
 
 	translateMedusa(-1, 0, -1);
-	columnasMedusa(5);
+	columnasMedusa(17);
 	translateMedusa(-1, 0, -1);
-	columnasMedusa(5);
+	columnasMedusa(17);
 	translateMedusa(-1, 0, 0);
-	columnasMedusa(5);
+	columnasMedusa(17);
 	translateMedusa(-1, 0, 0);
-	columnasMedusa(5);
+	columnasMedusa(17);
 	translateMedusa(-1, 0, 1);
-	columnasMedusa(5);
+	columnasMedusa(17);
 
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(16);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(14);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(13);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(12);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(10);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(9);
 
 	//Tercera Curva
 	translateMedusa(-1, 0, 1);
-	columnasMedusa(5);
+	columnasMedusa(7);
 	translateMedusa(-1, 0, 1);
-	columnasMedusa(5);
+	columnasMedusa(7);
 	translateMedusa(-1, 0, 0);
-	columnasMedusa(5);
+	columnasMedusa(7);
 	translateMedusa(-1, 0, 0);
-	columnasMedusa(5);//
+	columnasMedusa(7);//
 	translateMedusa(-1, 0, -1);
-	columnasMedusa(5);
+	columnasMedusa(7);
 	translateMedusa(-1, 0, -1);
-	columnasMedusa(5);
+	columnasMedusa(7);
 
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(6);
 	translateMedusa(0, 0, -2);
 	columnasMedusa(5);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(4);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(3);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(3);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(3);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(3);
 
 	//Cuarta Curva
 	translateMedusa(-1, 0, -1);
-	columnasMedusa(5);
+	columnasMedusa(4);
 	translateMedusa(-1, 0, -1);
 	columnasMedusa(5);
 	translateMedusa(-1, 0, 0);
-	columnasMedusa(5);
+	columnasMedusa(7);
 	translateMedusa(-1, 0, 0);
-	columnasMedusa(5);
+	columnasMedusa(9);
 	translateMedusa(-1, 0, 1);
-	columnasMedusa(5);
+	columnasMedusa(11);
 	translateMedusa(-1, 0, 1);
-	columnasMedusa(5);
+	columnasMedusa(13);
 
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(15);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(17);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(19);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(19);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(17);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(15);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(13);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(11);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(9);
 
 	//Quinta curva
 	translateMedusa(-1, 0, 1);
-	columnasMedusa(5);
+	columnasMedusa(7);
 	translateMedusa(-1, 0, 1);
-	columnasMedusa(5);
+	columnasMedusa(7);
 	translateMedusa(-1, 0, 0);
-	columnasMedusa(5);
+	columnasMedusa(6);
 	translateMedusa(-1, 0, -1);
 	columnasMedusa(5);
 	translateMedusa(-1, 0, -1);
-	columnasMedusa(5);
+	columnasMedusa(4);
 
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(4);
 	translateMedusa(0, 0, -2);
 	columnasMedusa(5);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(6);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(7);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(8);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(9);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(10);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(11);
 	translateMedusa(0, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(12);
 
 	//SextaCurva
 	translateMedusa(-1, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(13);
 	translateMedusa(-2, 0, -2);
-	columnasMedusa(5);
+	columnasMedusa(13);
 	translateMedusa(-2, 0, 0);
-	columnasMedusa(5);
+	columnasMedusa(13);
 	translateMedusa(-2, 0, 0);
-	columnasMedusa(5);
+	columnasMedusa(13);
 	translateMedusa(-2, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(13);
 	translateMedusa(-1, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(13);
 
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(12);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(10);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(9);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(8);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(7);
 	translateMedusa(0, 0, 2);
-	columnasMedusa(5);
+	columnasMedusa(6);
 	translateMedusa(0, 0, 2);
 	columnasMedusa(5);
 	translateMedusa(0, 0, 2);
@@ -679,18 +681,6 @@ void estructuraMedusaTotal(void) {
 
 	//Fin del circuito Medusa
 
-
-
-
-
-
-
-
-
-
-
-
-
 	//Pop General de la función
 	glPopMatrix();
 }
@@ -714,6 +704,18 @@ void carroMedusa(void) {
 
 	glPopMatrix();
 
+}
+
+void arregloCarrosMedusa(void) {
+	for (size_t i = 0; i < 8; i++)
+	{	
+		carroMedusa();
+		glPushMatrix();
+		glTranslatef(i * 4, 0, 0);
+		carroMedusa();
+		glPopMatrix();
+
+	}
 }
 
 void Voodoo(void) {
@@ -1911,6 +1913,7 @@ void display(void)   // Creamos la funcion donde se dibuja
 	
 	//3ds
 	//arboles
+	glColor3f(0, 1, 1);
 	glPushMatrix();
 	glDisable(GL_COLOR_MATERIAL);
 	glTranslatef(-20, -39.9, 10);
@@ -1929,6 +1932,7 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glScalef(5, 5, 5);
 	arbol.GLrender(NULL, _SHADED, 1.0);
 	glPopMatrix();
+	glColor3f(1, 1, 1);
 
 	//bancos
 	glPushMatrix();
@@ -1972,6 +1976,11 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glTranslatef(-90, -20, -50);
 	//glRotatef(90, 0, 1, 0);
 	glScalef(1.5,1.5,1.5);
+	glPushMatrix();
+	glTranslatef(4, 20, -1.75);
+	glRotatef(180,0,1,0);
+	arregloCarrosMedusa();
+	glPopMatrix();
 	estructuraMedusaTotal();
 	glPopMatrix();
 	//voodoo
