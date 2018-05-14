@@ -581,8 +581,97 @@ void estructuraMedusaTotal(void) {
 	translateMedusa(-1, 0, -1);
 	columnasMedusa(5);
 
-	translateMedusa(0, 0, -1);
+	translateMedusa(0, 0, -2);
 	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, -2);
+	columnasMedusa(5);
+
+	//SextaCurva
+	translateMedusa(-1, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(-2, 0, -2);
+	columnasMedusa(5);
+	translateMedusa(-2, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(-2, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(-2, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(-1, 0, 2);
+	columnasMedusa(5);
+
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(0, 0, 2);
+	columnasMedusa(5);
+
+	//Septima Curva
+	translateMedusa(1, 0, 2);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 1);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(2, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(1, 0, -1);
+	columnasMedusa(5);
+	translateMedusa(1, 0, -1);
+	columnasMedusa(5);
+
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+	translateMedusa(2, 0, 0);
+	columnasMedusa(5);
+
+	//Fin del circuito Medusa
+
+
+
+
+
 
 
 
