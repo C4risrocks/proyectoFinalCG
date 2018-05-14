@@ -1,4 +1,22 @@
-﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (clase.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (clase.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  texture.cpp
   main.cpp
-  pro_final.vcxproj -> C:\Users\Marco\Desktop\proyectoFinalLabCG\pro_final\Debug\pro_final.exe
-  pro_final.vcxproj -> C:\Users\Marco\Desktop\proyectoFinalLabCG\pro_final\Debug\pro_final.pdb (Full PDB)
+  figuras.cpp
+c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\figuras.cpp(20): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\figuras.cpp(90): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\figuras.cpp(158): warning C4838: conversion from 'double' to 'GLfloat' requires a narrowing conversion
+c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\figuras.cpp(441): warning C4101: 'theta': unreferenced local variable
+c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\figuras.cpp(441): warning C4101: 'phi': unreferenced local variable
+  Camera.cpp
+  Generating Code...
+CModel.lib(_3dsloader.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(_3dsloader.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(CModel.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(CModel.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(CObject.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(CObject.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(GFILoader.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(GFILoader.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(GLRender.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(GLRender.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(HandleStream.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(HandleStream.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(imageload.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(imageload.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(MATRIX4X4.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(MATRIX4X4.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(VECTOR3D.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(VECTOR3D.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
+CModel.lib(VECTOR4D.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(VECTOR4D.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
+  pro_final.vcxproj -> C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\pro_final.exe

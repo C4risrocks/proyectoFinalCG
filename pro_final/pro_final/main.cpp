@@ -1,8 +1,8 @@
 //					Semestre 2018 - 2  Proyecto final//
 //************************************************************//
 //************************************************************//
-//************** Alumno (s): Guevara Chávez Marco Antonio *********************************//
-//*************				Moreno Marín Christian							******//
+//************** Alumno (s): Guevara Chávez Marco Antonio ****//
+//*************				Moreno Marín Christian		******//
 //*************											******//
 //************************************************************//
 //************************************************************//
@@ -12,6 +12,8 @@
 #include "Camera.h"
 #include "cmodel/CModel.h"		//PERMITE TEXTURAS EN 3D
 
+#include "al.h" 
+#include "alc.h" 
 static GLuint ciudad_display_list;
 
 //keyframe
@@ -96,6 +98,9 @@ CFiguras fig3;
 CFiguras fig4;	//Pasto01
 CFiguras fig5;	//Casa01
 CFiguras fig6;
+
+CFiguras voodoo;
+CFiguras medusa;
 
 CModel asiento;
 CModel arbol;
@@ -187,23 +192,327 @@ void InitGL(GLvoid)     // Inicializamos parametros
 	//ciudad_display_list = createDL();
 
 	///
-	KeyFrame[0].movhombro = 0;	
-	KeyFrame[1].movhombro = -55;	
-	KeyFrame[2].movhombro = -55;	
-	KeyFrame[3].movhombro = -100;	
+	KeyFrame[0].movhombro = 0;
+	KeyFrame[1].movhombro = -55;
+	KeyFrame[2].movhombro = -55;
+	KeyFrame[3].movhombro = -100;
 	KeyFrame[4].movhombro = -55;
 
 	KeyFrame[5].movpie = 0;
-	KeyFrame[6].movpie= -25;
+	KeyFrame[6].movpie = -25;
 	KeyFrame[7].movpie = -40;
 	KeyFrame[8].movpie = -25;
 	//KeyFrame[].movhombro = -55;
 
 
 
-	
 
 
+
+}
+
+void soporteMedusa(void) {
+	glPushMatrix();
+
+	//----------------1
+
+	glPushMatrix();
+	glPushMatrix();
+	glTranslatef(0, 1.75, 0);
+	glRotatef(45, 0, 0, 1);
+	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glTranslatef(0, 3.5, 0);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+
+	glTranslatef(1.75, -1.75, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	glTranslatef(-3.5, 0, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	glPopMatrix();
+
+	//----------------2
+
+	glPushMatrix();
+	glTranslatef(0, 0, -3.5);
+	glPushMatrix();
+	glTranslatef(0, 1.75, 0);
+	glRotatef(45, 0, 0, 1);
+	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glTranslatef(0, 3.5, 0);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+
+	glTranslatef(1.75, -1.75, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	glTranslatef(-3.5, 0, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	glPopMatrix();
+
+	//-----------------3
+
+
+	glPushMatrix();
+	glTranslatef(-1.75, 0, -1.75);
+	glRotatef(90, 0, 1, 0);
+
+	glPushMatrix();
+	glTranslatef(0, 1.75, 0);
+	glRotatef(45, 0, 0, 1);
+	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glTranslatef(0, 3.5, 0);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+
+	glTranslatef(1.75, -1.75, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	glTranslatef(-3.5, 0, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	glPopMatrix();
+
+	//-------------4
+
+	glPushMatrix();
+
+	glTranslatef(1.75, 0, -1.75);
+	glRotatef(90, 0, 1, 0);
+
+	glPushMatrix();
+	glTranslatef(0, 1.75, 0);
+	glRotatef(45, 0, 0, 1);
+	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4.5, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glTranslatef(0, 3.5, 0);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+
+	glTranslatef(1.75, -1.75, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	glTranslatef(-3.5, 0, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	medusa.prisma(4, 0.5, 0.5, NULL);
+	glPopMatrix();
+
+	glPopMatrix();
+
+
+
+	glPopMatrix();
+}
+
+void estructuraMedusa() {
+	glPushMatrix();
+	//Push Función
+
+	//Columna 1
+	glPushMatrix();
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glPopMatrix();
+
+	//Columna 2
+
+	glPushMatrix();
+	glTranslatef(8, 0, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glTranslatef(0, 4, 0);
+	soporteMedusa();
+	glPopMatrix();
+
+	glPopMatrix();
+	//Pop Función
+}
+
+void carroMedusa(void) {
+	glPushMatrix();
+	//Carro Medusa
+	medusa.prisma(4, 0.5, 3, NULL);
+	glTranslatef(1.25, 1.25, 0);
+	medusa.prisma(1.5, 2, 3, NULL);
+	glTranslatef(-1, -0.25, 0);
+	medusa.prisma(0.5, 1.5, 2, NULL);
+	glTranslatef(-0.625, -0.5, 0);
+	medusa.prisma(0.75, 0.5, 2, NULL);
+	glTranslatef(-1.375, 0, 0);
+	medusa.prisma(0.5, 1.5, 3, NULL);
+
+	glPopMatrix();
+
+}
+
+void Voodoo(void) {
+	//Push de la estructrura
+	glPushMatrix();
+
+	//Base Voodoo
+	//Izquierda
+	glPushMatrix();
+	glTranslatef(-2.25, -2, 0);
+	voodoo.prisma(2, 13, 5, NULL);
+	glTranslatef(1.5, 6.5, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	voodoo.cilindro(2.5, 3, 20, NULL);
+	glPopMatrix();
+	glPopMatrix();
+
+	//Derecha
+	glPushMatrix();
+	glTranslatef(28.75, -2, 0);
+	voodoo.prisma(2, 13, 5, NULL);
+	glTranslatef(1.5, 6.5, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	voodoo.cilindro(2.5, 3, 20, NULL);
+	glPopMatrix();
+	glPopMatrix();
+
+	//Barra Movimiento Principal Voodoo
+	glRotatef(-45, 1, 0, 0);//Rotate de animación del juego
+	glTranslatef(0, 4, 0);
+	glPushMatrix();
+	glTranslated(25.75, -1, 0);
+	glRotatef(90, 0, 0, 1);
+	voodoo.cilindro(1, 25, 20, NULL);
+	glPopMatrix();
+
+
+	//Brazo Izquierdo del Voodoo
+	glPushMatrix();
+	voodoo.prisma(1.5, 10, 4, NULL);
+	glTranslated(0.75, -5, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	voodoo.cilindro(2, 1.5, 20, NULL);
+	glPopMatrix();
+	glTranslatef(-0.75, 15, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	voodoo.prismaTriangular(10, 4, 1.5, NULL);
+	glPopMatrix();
+	glTranslatef(0.75, 5, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	voodoo.cilindro(2.5, 1.5, 20, NULL);
+	glPopMatrix();
+
+	glPopMatrix();
+	glTranslatef(13.25, -6, 0);
+
+
+	//Canoa del Voodoo.
+	glPushMatrix();
+	voodoo.prisma(23, 1, 5, NULL);
+	glTranslatef(0, -1, 0);
+	voodoo.prisma(21, 1, 3, NULL);
+	glTranslatef(12.5, 1, 0);
+
+	//cilindro canoa
+	glColor3f(1, 0, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	voodoo.cilindro(0.5, 1, 20, NULL);
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-24, 0, 0);
+	glRotatef(90, 0, 0, 1);
+	voodoo.cilindro(0.5, 1, 20, NULL);
+	glPopMatrix();
+	glPopMatrix();
+
+	glTranslatef(13.25, 6, 0);
+	glColor3f(1, 1, 1);
+	//Brazo Derecho del Voodoo
+	glPushMatrix();
+	voodoo.prisma(1.5, 10, 4, NULL);
+	glTranslated(0.75, -5, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	voodoo.cilindro(2, 1.5, 20, NULL);
+	glPopMatrix();
+	glTranslatef(-0.75, 15, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 1, 0);
+	voodoo.prismaTriangular(10, 4, 1.5, NULL);
+	glPopMatrix();
+	glTranslatef(0.75, 5, 0);
+	glPushMatrix();
+	glRotatef(90, 0, 0, 1);
+	voodoo.cilindro(2.5, 1.5, 20, NULL);
+	glPopMatrix();
+
+	glPopMatrix();
+
+	glColor3f(1, 1, 1);
+
+	glPopMatrix();
 }
 
 void humanide(void) {
@@ -715,6 +1024,11 @@ void ninio(void) {
 	fig3.prisma2(0, 0);
 	glPopMatrix();
 
+	//Medusa
+	estructuraMedusa();
+
+
+	//pasto
 	glTranslatef(0, -6, 0);
 	//torso
 	glPushMatrix();
@@ -728,7 +1042,7 @@ void ninio(void) {
 	glTranslatef(2.5, -7.5, 0);
 
 	glPushMatrix();
-	
+
 	glScalef(2, 5, 3);
 	glColor3f(1, 1, 0);
 	fig3.prisma2(0, 0);
@@ -776,7 +1090,7 @@ void ninio(void) {
 
 	//brazo izquierdo
 	//Hombro1
-	
+
 	glPushMatrix();
 	glRotatef(-75, 0, 0, 1);
 	glPushMatrix();
@@ -945,7 +1259,7 @@ void ninio(void) {
 	//Hombro
 	glPushMatrix();
 	glTranslatef(-11, 0, 0);
-	glRotatef(-75,0,0,1);
+	glRotatef(-75, 0, 0, 1);
 	glPushMatrix();
 	glScalef(1, 2, 2);
 	glColor3f(1, 0, 1);
@@ -1160,7 +1474,7 @@ void pelota(void) {
 	glDisable(GL_LIGHTING);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	fig6.esfera(2, 10, 10,  t_pelota.GLindex);
+	fig6.esfera(2, 10, 10, t_pelota.GLindex);
 	glDisable(GL_BLEND);
 	glEnable(GL_LIGHTING);
 
@@ -1303,8 +1617,8 @@ void display(void)   // Creamos la funcion donde se dibuja
 
 	//niño
 	glPushMatrix();
-	glTranslatef(0, -10,  45);
-	glRotatef(180,0,1,0);
+	glTranslatef(0, -10, 45);
+	glRotatef(180, 0, 1, 0);
 	glScalef(.6, .6, .6);
 	ninio();
 	glPopMatrix();
@@ -1390,62 +1704,62 @@ void animacion()
 
 /*void animacion2()
 {
-	fig3.text_izq -= 0.01;
-	fig3.text_der -= 0.01;
-	if (fig3.text_izq<-1)
-		fig3.text_izq = 0;
-	if (fig3.text_der<0)
-		fig3.text_der = 1;
+fig3.text_izq -= 0.01;
+fig3.text_der -= 0.01;
+if (fig3.text_izq<-1)
+fig3.text_izq = 0;
+if (fig3.text_der<0)
+fig3.text_der = 1;
 
-	//Movimiento del monito
-	if (play)
-	{
+//Movimiento del monito
+if (play)
+{
 
-		if (i_curr_steps >= i_max_steps) //end of animation between frames?
-		{
-			playIndex++;
-			if (playIndex>FrameIndex - 2)	//end of total animation?
-			{
-				printf("termina anim\n");
-				playIndex = 0;
-				play = false;
-			}
-			else //Next frame interpolations
-			{
-				i_curr_steps = 0; //Reset counter
-								  //Interpolation
+if (i_curr_steps >= i_max_steps) //end of animation between frames?
+{
+playIndex++;
+if (playIndex>FrameIndex - 2)	//end of total animation?
+{
+printf("termina anim\n");
+playIndex = 0;
+play = false;
+}
+else //Next frame interpolations
+{
+i_curr_steps = 0; //Reset counter
+//Interpolation
 
-								  //Interpolaciones incremento.
-								  //el incremento es la distancia entre dos cuadros, el 2 - 1 y se divide entre el 90(i_max_steps)   Se hace la interpolacion
-
-
-				
-				KeyFrame[playIndex].incpie = (KeyFrame[playIndex + 1].movpie - KeyFrame[playIndex].movpie) / i_max_steps;
-
-			}
-		}
-		else
-		{	//Draw information
+//Interpolaciones incremento.
+//el incremento es la distancia entre dos cuadros, el 2 - 1 y se divide entre el 90(i_max_steps)   Se hace la interpolacion
 
 
-			
-			movpie += KeyFrame[playIndex].incpie;
+
+KeyFrame[playIndex].incpie = (KeyFrame[playIndex + 1].movpie - KeyFrame[playIndex].movpie) / i_max_steps;
+
+}
+}
+else
+{	//Draw information
 
 
-			i_curr_steps++;
-		}
 
-	}
+movpie += KeyFrame[playIndex].incpie;
 
-	frame++;
-	time = glutGet(GLUT_ELAPSED_TIME);
-	if (time - timebase > 1000) {
-		sprintf(s, "FPS:%4.2f", frame*1000.0 / (time - timebase));
-		timebase = time;
-		frame = 0;
-	}
 
-	glutPostRedisplay();
+i_curr_steps++;
+}
+
+}
+
+frame++;
+time = glutGet(GLUT_ELAPSED_TIME);
+if (time - timebase > 1000) {
+sprintf(s, "FPS:%4.2f", frame*1000.0 / (time - timebase));
+timebase = time;
+frame = 0;
+}
+
+glutPostRedisplay();
 }
 
 */
@@ -1495,7 +1809,7 @@ void keyboard(unsigned char key, int x, int y)  // Create Keyboard Function
 
 	case 'M':
 	case 'm':
-		if (play == false && (FrameIndex>1) )
+		if (play == false && (FrameIndex>1))
 		{
 
 			movhombro = KeyFrame[0].movhombro;
@@ -1539,7 +1853,7 @@ void keyboard(unsigned char key, int x, int y)  // Create Keyboard Function
 			play = false;
 		}
 		break;
-	
+
 
 		//break;
 
