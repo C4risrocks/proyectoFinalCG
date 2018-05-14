@@ -92,7 +92,8 @@ CTexture t_pav;
 CTexture t_ladrillo;
 CTexture t_ct;
 CTexture t_pelota;
-
+CTexture t_madera;
+CTexture t_metal;
 
 
 CFiguras cubo;
@@ -310,6 +311,14 @@ void InitGL(GLvoid)     // Inicializamos parametros
 	t_pelota.LoadTGA("pel.tga");
 	t_pelota.BuildGLTexture();
 	t_pelota.ReleaseImage();
+
+	t_madera.LoadTGA("mad1.tga");
+	t_madera.BuildGLTexture();
+	t_madera.ReleaseImage();
+
+	t_metal.LoadTGA("metal.tga");
+	t_metal.BuildGLTexture();
+	t_metal.ReleaseImage();
 
 
 	//3ds carga
@@ -673,24 +682,27 @@ void Voodoo(void) {
 	//Base Voodoo
 	//Izquierda
 	glPushMatrix();
+	glColor3f(1,1,1);
 	glTranslatef(-2.25, -2, 0);
-	voodoo.prisma(2, 13, 5, NULL);
+	glDisable(GL_LIGHTING);
+	voodoo.prisma(2, 13, 5, t_madera.GLindex);
 	glTranslatef(1.5, 6.5, 0);
+	glEnable(GL_LIGHTING);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	voodoo.cilindro(2.5, 3, 20, NULL);
+	voodoo.cilindro(2.5, 3, 20, t_metal.GLindex);
 	glPopMatrix();
 	glPopMatrix();
 
 	//Derecha
 	glPushMatrix();
 	glTranslatef(28.75, -2, 0);
-	voodoo.prisma(2, 13, 5, NULL);
+	voodoo.prisma(2, 13, 5, t_madera.GLindex);
 	glTranslatef(1.5, 6.5, 0);
 	
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	voodoo.cilindro(2.5, 3, 20, NULL);
+	voodoo.cilindro(2.5, 3, 20, t_madera.GLindex);
 	glPopMatrix();
 	glPopMatrix();
 
@@ -701,28 +713,28 @@ void Voodoo(void) {
 	glPushMatrix();
 	glTranslated(25.75, -1, 0);
 	glRotatef(90, 0, 0, 1);
-	voodoo.cilindro(1, 25, 20, NULL);
+	voodoo.cilindro(1, 25, 20, t_metal.GLindex);
 	glPopMatrix();
 
 
 	//Brazo Izquierdo del Voodoo
 	glTranslated(0, -5, 0);
 	glPushMatrix();
-	voodoo.prisma(1.5, 10, 4, NULL);
+	voodoo.prisma(1.5, 10, 4, t_madera.GLindex);
 	glTranslated(0.75, -5, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	voodoo.cilindro(2, 1.5, 20, NULL);
+	voodoo.cilindro(2, 1.5, 20, t_madera.GLindex);
 	glPopMatrix();
 	glTranslatef(-0.75, 15, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 1, 0);
-	voodoo.prismaTriangular(10, 4, 1.5, NULL);
+	voodoo.prismaTriangular(10, 4, 1.5, t_madera.GLindex);
 	glPopMatrix();
 	glTranslatef(0.75, 5, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	voodoo.cilindro(2.5, 1.5, 20, NULL);
+	voodoo.cilindro(2.5, 1.5, 20, t_madera.GLindex);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -733,20 +745,23 @@ void Voodoo(void) {
 	glPushMatrix();
 	glRotatef(angCanoa, 1, 0, 0);//Rotate de animación del juego
 	voodoo.prisma(23, 1, 5, NULL);
+	
+	voodoo.prisma(23, 1, 5, t_madera.GLindex);
 	glTranslatef(0, -1, 0);
-	voodoo.prisma(21, 1, 3, NULL);
+
+	voodoo.prisma(21, 1, 3, t_madera.GLindex);
 	glTranslatef(12.5, 1, 0);
 
 	//cilindro canoa
 	glColor3f(1, 0, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	voodoo.cilindro(0.5, 1, 20, NULL);
+	voodoo.cilindro(0.5, 1, 20, t_metal.GLindex);
 	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(-24, 0, 0);
 	glRotatef(90, 0, 0, 1);
-	voodoo.cilindro(0.5, 1, 20, NULL);
+	voodoo.cilindro(0.5, 1, 20, t_metal.GLindex);
 	glPopMatrix();
 	glPopMatrix();
 
@@ -754,21 +769,21 @@ void Voodoo(void) {
 	glColor3f(1, 1, 1);
 	//Brazo Derecho del Voodoo
 	glPushMatrix();
-	voodoo.prisma(1.5, 10, 4, NULL);
+	voodoo.prisma(1.5, 10, 4, t_madera.GLindex);
 	glTranslated(0.75, -5, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	voodoo.cilindro(2, 1.5, 20, NULL);
+	voodoo.cilindro(2, 1.5, 20, t_madera.GLindex);
 	glPopMatrix();
 	glTranslatef(-0.75, 15, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 1, 0);
-	voodoo.prismaTriangular(10, 4, 1.5, NULL);
+	voodoo.prismaTriangular(10, 4, 1.5, t_madera.GLindex);
 	glPopMatrix();
 	glTranslatef(0.75, 5, 0);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
-	voodoo.cilindro(2.5, 1.5, 20, NULL);
+	voodoo.cilindro(2.5, 1.5, 20, t_madera.GLindex);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -1730,7 +1745,7 @@ void ninio(void) {
 }
 
 void pelota(void) {
-
+	glColor3f(1,1,1);
 	glDisable(GL_LIGHTING);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1823,7 +1838,7 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glPushMatrix();
 	glTranslatef(0, -39.9, 0.0);
 	glScalef(20, .1, 200);
-	fig3.prisma3(t_pav.GLindex, 0);
+	fig5.prisma3(t_pav.GLindex, 0);
 	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
@@ -1889,7 +1904,6 @@ void display(void)   // Creamos la funcion donde se dibuja
 	ninio();
 	glPopMatrix();
 
-
 	*/
 	glEnable(GL_LIGHTING);
 
@@ -1900,7 +1914,14 @@ void display(void)   // Creamos la funcion donde se dibuja
 	estructuraMedusaTotal();
 
 	glPopMatrix();
+	//vodoo
+	glPushMatrix();
+	glTranslatef(40,10,-120);
+	glScalef(4,4,4);
+	glRotatef(270, 0, 1, 0);
 
+	//Voodoo();
+	glPopMatrix();
 
 	glPopMatrix();
 
@@ -1920,8 +1941,9 @@ void display(void)   // Creamos la funcion donde se dibuja
 
 void animacion()
 {
-	angVoodoo++;
 	angCanoa = 0;
+	angVoodoo++;
+	
 
 	fig3.text_izq -= 0.01;
 	fig3.text_der -= 0.01;

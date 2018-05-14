@@ -1,6 +1,6 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (clase.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   main.cpp
-c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\main.cpp(487): warning C4018: '<': signed/unsigned mismatch
+c:\users\c4ris\documents\github\proyectofinallabcg\pro_final\pro_final\main.cpp(496): warning C4018: '<': signed/unsigned mismatch
 CModel.lib(_3dsloader.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(_3dsloader.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
 CModel.lib(CModel.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(CModel.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
 CModel.lib(CObject.obj) : warning LNK4099: PDB 'vc70.pdb' was not found with 'CModel.lib(CObject.obj)' or at 'C:\Users\c4ris\Documents\GitHub\proyectoFinalLabCG\pro_final\Debug\vc70.pdb'; linking object as if no debug info
