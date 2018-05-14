@@ -94,6 +94,7 @@ CTexture t_ct;
 CTexture t_pelota;
 CTexture t_madera;
 CTexture t_metal;
+CTexture t_carrito;
 
 
 CFiguras cubo;
@@ -127,7 +128,7 @@ int endWithError(char* msg, int error = 0) {
 	return error;
 }
 
-/*char openALFunc(void) {
+char lecturaDataAudio(void) {
 
 	FILE *fp = fopen("WAVE/sound.wav", "rb");
 
@@ -140,7 +141,7 @@ int endWithError(char* msg, int error = 0) {
 	DWORD dataSize;
 
 	//Retorno de error en caso de no ser un archivo aceptado
-	/*fread(type, sizeof(char), 4, fp);
+	fread(type, sizeof(char), 4, fp);
 	if (type[0] != 'R' || type[1] != 'I' || type[2] != 'F' || type[3] != 'F')
 		return endWithError("No RIFF");
 
@@ -150,9 +151,9 @@ int endWithError(char* msg, int error = 0) {
 
 	fread(type, sizeof(char), 4, fp);
 	if (type[0] != 'f' || type[1] != 'm' || type[2] != 't' || type[3] != ' ')
-		return endWithError("No fmt");*/
+		return endWithError("No fmt");
 
-	/*//Lectura de los datos del archivo WAVE
+	//Lectura de los datos del archivo WAVE
 
 	fread(&chunkSize, sizeof(DWORD), 1, fp);
 	fread(&formatType, sizeof(short), 1, fp);
@@ -162,84 +163,20 @@ int endWithError(char* msg, int error = 0) {
 	fread(&bytesPerSample, sizeof(short), 1, fp);
 	fread(&bitsPerSample, sizeof(short), 1, fp);
 
-	/*fread(type, sizeof(char), 4, fp);
+	fread(type, sizeof(char), 4, fp);
 	if (type[0] != 'd' || type[1] != 'a' || type[2] != 't' || type[3] != 'a')
-		return endWithError("Missing DATA");*/
+		return endWithError("Missing DATA");
 
-	/*fread(&dataSize, sizeof(DWORD), 1, fp);
+	fread(&dataSize, sizeof(DWORD), 1, fp);
 
 	//Reservar memoria para la información del sonido
 	//Y reproducción del sonido
 	unsigned char* buf = new unsigned char[dataSize];
 	fread(buf, sizeof(BYTE), dataSize, fp);
 
-	//Creacion de contexto
-
-	ALCdevice *device;
-	ALCcontext *context;
-	device = alcOpenDevice(NULL);
-	if (!device) return endWithError("no sound device");
-	context = alcCreateContext(device, NULL);
-	alcMakeContextCurrent(context);
-	if (!context) return endWithError("no sound context");
-
-	//Creacion de fuente de emision de sonido
-	ALuint source;
-	ALuint buffer;
-	ALuint frequency = sampleRate;
-	ALuint format = 0;
-	
-	alGenBuffers(1, &buffer);
-	alGenSources(1, &source);
-
-	//Reconocimiento del formato de sonido
-
-	if (bitsPerSample == 8) {
-		if (channels == 1)
-			format = AL_FORMAT_MONO8;
-		else if (channels == 2)
-			format = AL_FORMAT_STEREO8;
-	}
-	else if(bitsPerSample == 16){
-		if (channels == 1)
-			format = AL_FORMAT_MONO16;
-		else if (channels == 2)
-			format = AL_FORMAT_STEREO16;
-	}
-
-	//Informacion leida del buffer
-
-	alBufferData(buffer, format, buf, dataSize, frequency);
-
-	//Posicion y velocidad del sonido de la fuente y del escucha
-
-	ALfloat SourcePos[] = { 0.0f,0.0f,0.0f };
-	ALfloat SourceVel[] = { 0.0f,0.0f,0.0f };
-	ALfloat ListenerPos[] = { 0,0,0 };
-	ALfloat ListenerVel[] = { 0,0,0 };
-	ALfloat ListenerOri[] = { 0,0,0,-1,0 };
-
-	//Valores asociados a alListenerfv() y alSourcei/fv()
-	//Y la fuente asociada al buffer
-
-	//Escuch
-	alListenerfv(AL_POSITION, ListenerPos);
-	alListenerfv(AL_VELOCITY, ListenerVel);
-	alListenerfv(AL_ORIENTATION, ListenerOri);
-
-	//Fuente
-	alSourcei(source, AL_BUFFER, buffer);
-	alSourcei(source, AL_PITCH, 1);
-	alSourcei(source, AL_GAIN, 1);
-	alSourcefv(source, AL_POSITION, SourcePos);
-	alSourcefv(source, AL_VELOCITY, SourceVel);
-	alSourcei(source, AL_LOOPING, AL_FALSE);
-
-	//Reproducir fuente
-	alSourcePlay(source);
+}
 
 
-}*/
 
 
 
@@ -319,6 +256,10 @@ void InitGL(GLvoid)     // Inicializamos parametros
 	t_metal.LoadTGA("metal.tga");
 	t_metal.BuildGLTexture();
 	t_metal.ReleaseImage();
+
+	t_carrito.LoadTGA("frenteCarritoMedusa.tga");
+	t_carrito.BuildGLTexture();
+	t_carrito.ReleaseImage();
 
 
 	//3ds carga
@@ -661,15 +602,18 @@ void estructuraMedusaTotal(void) {
 void carroMedusa(void) {
 	glPushMatrix();
 	//Carro Medusa
-	medusa.prisma(4, 0.5, 3, NULL);
+	glColor3f(1, 1, 1);
+	medusa.prisma(4, 0.5, 3, t_metal.GLindex);
 	glTranslatef(1.25, 1.25, 0);
-	medusa.prisma(1.5, 2, 3, NULL);
+	medusa.prisma(1.5, 2, 3, t_madera.GLindex);
 	glTranslatef(-1, -0.25, 0);
+	glColor3f(1, 0, 0);
 	medusa.prisma(0.5, 1.5, 2, NULL);
 	glTranslatef(-0.625, -0.5, 0);
 	medusa.prisma(0.75, 0.5, 2, NULL);
+	glColor3f(1, 1, 1);
 	glTranslatef(-1.375, 0, 0);
-	medusa.prisma(0.5, 1.5, 3, NULL);
+	medusa.prisma(0.5, 1.5, 3, t_carrito.GLindex);
 
 	glPopMatrix();
 
