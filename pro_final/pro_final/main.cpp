@@ -12,14 +12,53 @@
 #include "Camera.h"
 #include "cmodel/CModel.h"		//PERMITE TEXTURAS EN 3D
 
+static GLuint ciudad_display_list;
+
+//keyframe
+
+float movhombro = 0.0;
+float anghom = 0.0;
+float movpie = 0.0;
+
+#define MAX_FRAMES 20  // Cuantos cuadros capturamos por segundo
+int i_max_steps = 90;
+int i_curr_steps = 0;
+
+typedef struct _frame  // Debemos declarar la variable y otra que es su incremento
+{
+	//Variables para GUARDAR Key Frames
+	float posX;		//Variable para PosicionX
+	float posY;		//Variable para PosicionY
+	float posZ;		//Variable para PosicionZ
+	float incX;		//Variable para IncrementoX
+	float incY;		//Variable para IncrementoY
+	float incZ;		//Variable para IncrementoZ
+
+	float transZ = -5.0f;
+	float transX = 0.0f;
+	float angleX = 0.0f;
+	float angleY = 0.0f;
+	int screenW = 0.0;
+	int screenH = 0.0;
+	float movhombro = 0.0;
+	float movcodo = 0.0;
+	float inchom = 0.0;
+	float movpie = 0.0;
+	float incpie = 0.0;
+
+
+}FRAME;
+
+FRAME KeyFrame[MAX_FRAMES];
+int FrameIndex = 20;			//introducir datos
+bool play = false;  //Play en falso
+int playIndex = 0;
+
 
 //NEW//////////////////NEW//////////////////NEW//////////////////NEW////////////////
-static GLuint ciudad_display_list;	//Display List for the Monito
-
 
 int w = 500, h = 500;
 int frame = 0, time, timebase = 0;
-int deltaTime = 0;
 char s[30];
 
 CCamera objCamera;	//Create objet Camera
@@ -27,6 +66,8 @@ CCamera objCamera;	//Create objet Camera
 GLfloat g_lookupdown = 0.0f;    // Look Position In The Z-Axis (NEW) 
 
 int font = (int)GLUT_BITMAP_HELVETICA_18;
+
+
 
 GLfloat Diffuse[] = { 0.5f, 0.5f, 0.5f, 1.0f };				// Diffuse Light Values
 GLfloat Specular[] = { 1.0, 1.0, 1.0, 1.0 };				// Specular Light Values
@@ -39,6 +80,8 @@ CTexture t_nubes;
 CTexture t_pav;
 CTexture t_ladrillo;
 CTexture t_ct;
+CTexture t_pelota;
+
 
 
 CFiguras cubo;
@@ -127,6 +170,10 @@ void InitGL(GLvoid)     // Inicializamos parametros
 	t_ct.BuildGLTexture();
 	t_ct.ReleaseImage();
 
+	t_pelota.LoadTGA("pel.tga");
+	t_pelota.BuildGLTexture();
+	t_pelota.ReleaseImage();
+
 
 	//3ds carga
 	arbol._3dsLoad("3ds/firtree3.3ds");
@@ -137,7 +184,25 @@ void InitGL(GLvoid)     // Inicializamos parametros
 	objCamera.Position_Camera(0, 2.5f, 3, 0, 2.5f, 0, 0, 1, 0);
 
 	//NEW Crear una lista de dibujo
-	ciudad_display_list = createDL();
+	//ciudad_display_list = createDL();
+
+	///
+	KeyFrame[0].movhombro = 0;	
+	KeyFrame[1].movhombro = -55;	
+	KeyFrame[2].movhombro = -55;	
+	KeyFrame[3].movhombro = -100;	
+	KeyFrame[4].movhombro = -55;
+
+	KeyFrame[5].movpie = 0;
+	KeyFrame[6].movpie= -25;
+	KeyFrame[7].movpie = -40;
+	KeyFrame[8].movpie = -25;
+	//KeyFrame[].movhombro = -55;
+
+
+
+	
+
 
 }
 
@@ -147,19 +212,19 @@ void humanide(void) {
 	glPushMatrix();
 	glScalef(4, 4, 4);
 	glColor3f(1, 1, 1);
-	fig3.prisma3(0,0);
+	fig4.esfera(0.6, 20, 20, 0);
 	glPopMatrix();
 
 	//ojos
 	glPushMatrix();
-	glTranslatef(-0.5, 0, 2);
+	glTranslatef(-0.5, 0, 2.5);
 	glScalef(.52, .52, .1);
 	glColor3f(0, .1, 1);
 	fig3.prisma3(0, 0);
 	glPopMatrix();
-	
+
 	glPushMatrix();
-	glTranslatef(0.5, 0, 2);
+	glTranslatef(0.5, 0, 2.5);
 	glScalef(.52, .52, .1);
 	glColor3f(0, .1, 1);
 	fig3.prisma2(0, 0);
@@ -233,14 +298,23 @@ void humanide(void) {
 	glTranslatef(3, 21.5, 0);
 
 	//brazo izquierdo
-	//Hombro
+	//Hombro1
 	glPushMatrix();
-	//glRotatef(angHombro, 0, 0, 1);
+	/*glPushMatrix();
+	glScalef(1, 2, 2);
+	glColor3f(1, 1, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+	*/
+	//hombro2
+	glPushMatrix();
+	glRotatef(movhombro, 0, 0, 1);
 	glPushMatrix();
 	glScalef(1, 2, 2);
 	glColor3f(1, 1, 1);
 	fig3.prisma2(0, 0);
 	glPopMatrix();
+
 
 	//Bicep
 	glPushMatrix();
@@ -400,7 +474,7 @@ void humanide(void) {
 	//Hombro
 	glPushMatrix();
 	glTranslatef(-11, 0, 0);
-	//glRotatef(-angHombro, 0, 0, 1);
+	glRotatef(-movhombro, 0, 0, 1);
 	glPushMatrix();
 	glScalef(1, 2, 2);
 	glColor3f(1, 0, 1);
@@ -604,10 +678,508 @@ void humanide(void) {
 	fig3.prisma2(0, 0);
 	glPopMatrix();
 
-	
+
 
 }
 
+void ninio(void) {
+
+	//cabeza
+	glPushMatrix();
+	glScalef(4, 4, 4);
+	glColor3f(1, 1, 1);
+	fig4.esfera(0.6, 20, 20, 0);
+	glPopMatrix();
+
+	//ojos
+	glPushMatrix();
+	glTranslatef(-0.5, 0, 2.5);
+	glScalef(.52, .52, .1);
+	glColor3f(0, .1, 1);
+	fig3.prisma3(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0.5, 0, 2.5);
+	glScalef(.52, .52, .1);
+	glColor3f(0, .1, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glTranslatef(0, -3, 0);
+
+	//cuello
+	glPushMatrix();
+	glScalef(3, 2, 3);
+	glColor3f(1, 0, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glTranslatef(0, -6, 0);
+	//torso
+	glPushMatrix();
+	glScalef(10, 10, 3);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//pierna izquierda
+	//muslo
+	glTranslatef(2.5, -7.5, 0);
+
+	glPushMatrix();
+	
+	glScalef(2, 5, 3);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glTranslatef(0, -3, 0);
+	//rodilla
+	glPushMatrix();
+	glScalef(2, 1, 3);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glTranslatef(0, -3, 0);
+
+	//espinilla
+	glPushMatrix();
+	glScalef(2, 5, 3);
+	glColor3f(1, 0.5, 0.5);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glTranslatef(0, -2.75, 0);
+
+	//tobillo
+	glPushMatrix();
+	glScalef(2, 0.5, 3);
+	glColor3f(1, 0, 0.5);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glTranslatef(0, -1.25, 0);
+	//pie
+	glPushMatrix();
+	glScalef(2, 2, 3);
+	glColor3f(0.5, 0, 0.5);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0, 0, 0);
+	glPopMatrix();
+
+	glTranslatef(3, 21.5, 0);
+
+	//brazo izquierdo
+	//Hombro1
+	
+	glPushMatrix();
+	glRotatef(-75, 0, 0, 1);
+	glPushMatrix();
+	//glRotatef(75,0,1,0);
+	glScalef(1, 2, 2);
+	glColor3f(1, 1, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+
+	//Bicep
+	glPushMatrix();
+	glTranslatef(2, 0, 0);
+	glScalef(3, 2, 2);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//Codo
+	//glRotatef(angCodo, 0, 1, 0);
+	glPushMatrix();
+	glTranslatef(3.75, 0, 0);
+	glScalef(0.5, 2, 2);
+	glColor3f(1, 0, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//Antebrazo
+	glPushMatrix();
+	glTranslatef(6, 0, 0);
+	glScalef(4, 2, 2);
+	glColor3f(0, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//Muñeca
+	//glRotatef(angMuni, 0, 1, 0);
+	glPushMatrix();
+	glTranslatef(8.25, 0, 0);
+	glScalef(0.5, 2, 2);
+	glColor3f(1, 1, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//Mano
+	glPushMatrix();
+	glTranslatef(9.5, 0, 0);
+	glScalef(2, 2, 2);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//dedo pulgar
+	glPushMatrix();
+	//glRotatef(angDedP, 1, 0, 0);
+	glTranslatef(9.75, 1.25, 0);
+	glScalef(.3, .5, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(angDedP, 1, 0, 0);
+	glTranslatef(9.75, 1.75, 0);
+	glScalef(.3, .5, 2);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//dedo indice
+	glPushMatrix();
+	//glRotatef(angDedI, 0, 1, 0);
+	glTranslatef(10.75, .75, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(angDedI, 0, 1, 0);
+	glTranslatef(11.25, .75, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(angDedI, 0, 1, 0);
+	glTranslatef(11.75, .75, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//dedo medio
+
+	glPushMatrix();
+	//glRotatef(angMed, 0, 1, 0);
+	glTranslatef(10.75, .25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(angMed, 0, 1, 0);
+	glTranslatef(11.25, .25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(angMed, 0, 1, 0);
+	glTranslatef(11.75, .25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//dedo anular
+	glPushMatrix();
+	//glRotatef(angAn, 0, 1, 0);
+	glTranslatef(10.75, -.25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(angAn, 0, 1, 0);
+	glTranslatef(11.25, -.25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(angAn, 0, 1, 0);
+	glTranslatef(11.75, -.25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+	//meñique
+	glPushMatrix();
+	//glRotatef(angMe, 0, 1, 0);
+	glTranslatef(10.75, -.75, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(angMe, 0, 1, 0);
+	glTranslatef(11.25, -.75, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPopMatrix();
+
+
+	//Brazo derecha
+	//Hombro
+	glPushMatrix();
+	glTranslatef(-11, 0, 0);
+	glRotatef(-75,0,0,1);
+	glPushMatrix();
+	glScalef(1, 2, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//Bicep
+	glPushMatrix();
+	glTranslatef(-2, 0, 0);
+	glScalef(3, 2, 2);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//Codo
+	//glRotatef(-angCodo, 0, 1, 0);
+	glPushMatrix();
+	glTranslatef(-3.75, 0, 0);
+	glScalef(0.5, 2, 2);
+	glColor3f(1, 0, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//Antebrazo
+	glPushMatrix();
+	glTranslatef(-6, 0, 0);
+	glScalef(4, 2, 2);
+	glColor3f(0, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//Muñeca
+	//glRotatef(-angMuni, 0, 1, 0);
+	glPushMatrix();
+	glTranslatef(-8.25, 0, 0);
+	glScalef(0.5, 2, 2);
+	glColor3f(1, 1, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//Mano
+	glPushMatrix();
+	glTranslatef(-9.5, 0, 0);
+	glScalef(2, 2, 2);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//dedo pulgar
+	glPushMatrix();
+	//glRotatef(-angDedP, 1, 0, 0);
+	glTranslatef(-9.75, 1.25, 0);
+	glScalef(.3, .5, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(-angDedP, 1, 0, 0);
+	glTranslatef(-9.75, 1.75, 0);
+	glScalef(.3, .5, 2);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//dedo indice
+	glPushMatrix();
+	//glRotatef(-angDedI, 0, 1, 0);
+	glTranslatef(-10.75, .75, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(-angDedI, 0, 1, 0);
+	glTranslatef(-11.25, .75, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(-angDedI, 0, 1, 0);
+	glTranslatef(-11.75, .75, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//dedo medio
+
+	glPushMatrix();
+	//glRotatef(-angMed, 0, 1, 0);
+	glTranslatef(-10.75, .25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(-angMed, 0, 1, 0);
+	glTranslatef(-11.25, .25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(-angMed, 0, 1, 0);
+	glTranslatef(-11.75, .25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	//dedo anular
+	glPushMatrix();
+	//glRotatef(-angAn, 0, 1, 0);
+	glTranslatef(-10.75, -.25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(-angAn, 0, 1, 0);
+	glTranslatef(-11.25, -.25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(-angAn, 0, 1, 0);
+	glTranslatef(-11.75, -.25, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(0, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+	//meñique
+	glPushMatrix();
+	//glRotatef(-angMe, 0, 1, 0);
+	glTranslatef(-10.75, -.75, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPushMatrix();
+	//glRotatef(-angMe, 0, 1, 0);
+	glTranslatef(-11.25, -.75, 0);
+	glScalef(.5, .3, 2);
+	glColor3f(1, 1, 0);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glPopMatrix();
+
+
+	//pie derecho
+	//muslo 
+	glPushMatrix();
+	glPushMatrix();
+	glTranslatef(-7.5, -11.5, 0);
+	glRotatef(movpie, 1, 0, 0);
+	glPushMatrix();
+	glScalef(2, 5, 3);
+	glColor3f(0.6, 0, 0.5);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+	glTranslatef(0, -3, 0);
+	//rodilla
+	glPushMatrix();
+	glScalef(2, 1, 3);
+	glColor3f(1, 0, 1);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glTranslatef(0, -3, 0);
+
+	//espinilla
+	glPushMatrix();
+	glScalef(2, 5, 3);
+	glColor3f(1, 0.5, 0.5);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glTranslatef(0, -2.75, 0);
+
+	//tobillo
+	glPushMatrix();
+	glScalef(2, 0.5, 3);
+	glColor3f(1, 0, 0.5);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+
+	glTranslatef(0, -1.25, 0);
+	//pie
+	glPushMatrix();
+	glScalef(2, 2, 3);
+	glColor3f(0.5, 0, 0.5);
+	fig3.prisma2(0, 0);
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+
+}
+
+void pelota(void) {
+
+	glDisable(GL_LIGHTING);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	fig6.esfera(2, 10, 10,  t_pelota.GLindex);
+	glDisable(GL_BLEND);
+	glEnable(GL_LIGHTING);
+
+
+}
+
+
+
+void pintaTexto(float x, float y, float z, void *font, char *string)
+{
+
+	char *c;     //Almacena los caracteres a escribir
+	glRasterPos3f(x, y, z);	//Posicion apartir del centro de la ventana
+							//glWindowPos2i(150,100);
+	for (c = string; *c != '\0'; c++) //Condicion de fin de cadena
+	{
+		glutBitmapCharacter(font, *c); //imprime
+	}
+}
 
 void display(void)   // Creamos la funcion donde se dibuja
 {
@@ -650,13 +1222,13 @@ void display(void)   // Creamos la funcion donde se dibuja
 
 	//tienda
 	glPushMatrix();
-	glTranslatef(23,-30,45);
-	glScalef(5,5,5);
+	glTranslatef(23, -30, 45);
+	glScalef(5, 5, 5);
 	glPushMatrix();
 	glRotatef(90, 0, 0, 1);
 	glScalef(5, 5, 5);
 	fig3.prisma2(t_ladrillo.GLindex, t_ladrillo.GLindex);
-	glPopMatrix();	
+	glPopMatrix();
 	//cara de tienda
 	glPushMatrix();
 	glRotatef(90, 1, 0, 0);
@@ -665,7 +1237,7 @@ void display(void)   // Creamos la funcion donde se dibuja
 	fig3.prisma3(t_ct.GLindex, t_ct.GLindex);
 	glPopMatrix();
 	glPopMatrix();
-	
+
 
 	//piso
 	glPushMatrix();
@@ -675,19 +1247,19 @@ void display(void)   // Creamos la funcion donde se dibuja
 	glEnable(GL_LIGHTING);
 	glPopMatrix();
 
-	
+
 
 	//3ds
-		//arboles
+	//arboles
 	glPushMatrix();
 	glDisable(GL_COLOR_MATERIAL);
-	glTranslatef(-20,-39.9,10);
-	glScalef(5,5 ,5);
-    arbol.GLrender(NULL, _SHADED, 1.0);
+	glTranslatef(-20, -39.9, 10);
+	glScalef(5, 5, 5);
+	arbol.GLrender(NULL, _SHADED, 1.0);
 	glPopMatrix();
 
 	glPushMatrix();
-		glTranslatef(45, -39.9, 15);
+	glTranslatef(45, -39.9, 15);
 	glScalef(5, 5, 5);
 	arbol.GLrender(NULL, _SHADED, 1.0);
 	glPopMatrix();
@@ -701,36 +1273,51 @@ void display(void)   // Creamos la funcion donde se dibuja
 	//bancos
 	glPushMatrix();
 	glTranslatef(20, -39.9, -40);
-	glRotatef(270,0,1,0);
+	glRotatef(270, 0, 1, 0);
 	glScalef(.05, .05, .05);
-	asiento.GLrender(NULL, _SHADED, 1.0);
+	//asiento.GLrender(NULL, _SHADED, 1.0);
 	glPopMatrix();
-	
+
 	glPushMatrix();
 	glTranslatef(-20, -39.9, -40);
 	glRotatef(90, 0, 1, 0);
 	glScalef(.05, .05, .05);
-	asiento.GLrender(NULL, _SHADED, 1.0);
+	//asiento.GLrender(NULL, _SHADED, 1.0);
 	glPopMatrix();
-	
+
 	glEnable(GL_COLOR_MATERIAL);
 
 	//humanoide
 	glPushMatrix();
-	glTranslatef(0,-30,0);
-		glScalef(.4,.4,.4);
-		humanide();
+	glTranslatef(0, -28, 0);
+	glScalef(.4, .4, .4);
+	humanide();
 	glPopMatrix();
 
-	
-	
+
+	glPushMatrix();
+	glTranslatef(-3, -20, 5);
+	//fig5.esfera(2,12,12,0);
+	pelota();
+	glPopMatrix();
+
+	//niño
+	glPushMatrix();
+	glTranslatef(0, -10,  45);
+	glRotatef(180,0,1,0);
+	glScalef(.6, .6, .6);
+	ninio();
+	glPopMatrix();
+
+
+
 
 	glPopMatrix();
 
-	
-	
-	
-	
+
+
+
+
 	glColor3f(1.0, 1.0, 1.0);
 
 	glPopMatrix();
@@ -743,10 +1330,125 @@ void display(void)   // Creamos la funcion donde se dibuja
 
 void animacion()
 {
+	fig3.text_izq -= 0.01;
+	fig3.text_der -= 0.01;
+	if (fig3.text_izq<-1)
+		fig3.text_izq = 0;
+	if (fig3.text_der<0)
+		fig3.text_der = 1;
 
-	
+	//Movimiento del monito
+	if (play)
+	{
+
+		if (i_curr_steps >= i_max_steps) //end of animation between frames?
+		{
+			playIndex++;
+			if (playIndex>FrameIndex - 2)	//end of total animation?
+			{
+				printf("termina anim\n");
+				playIndex = 0;
+				play = false;
+			}
+			else //Next frame interpolations
+			{
+				i_curr_steps = 0; //Reset counter
+								  //Interpolation
+
+								  //Interpolaciones incremento.
+								  //el incremento es la distancia entre dos cuadros, el 2 - 1 y se divide entre el 90(i_max_steps)   Se hace la interpolacion
+
+
+				KeyFrame[playIndex].inchom = (KeyFrame[playIndex + 1].movhombro - KeyFrame[playIndex].movhombro) / i_max_steps;
+				KeyFrame[playIndex].incpie = (KeyFrame[playIndex + 1].movpie - KeyFrame[playIndex].movpie) / i_max_steps;
+
+			}
+		}
+		else
+		{	//Draw information
+
+
+			movhombro += KeyFrame[playIndex].inchom;
+			movpie += KeyFrame[playIndex].incpie;
+
+
+			i_curr_steps++;
+		}
+
+	}
+
+	frame++;
+	time = glutGet(GLUT_ELAPSED_TIME);
+	if (time - timebase > 1000) {
+		sprintf(s, "FPS:%4.2f", frame*1000.0 / (time - timebase));
+		timebase = time;
+		frame = 0;
+	}
+
+	glutPostRedisplay();
 }
 
+/*void animacion2()
+{
+	fig3.text_izq -= 0.01;
+	fig3.text_der -= 0.01;
+	if (fig3.text_izq<-1)
+		fig3.text_izq = 0;
+	if (fig3.text_der<0)
+		fig3.text_der = 1;
+
+	//Movimiento del monito
+	if (play)
+	{
+
+		if (i_curr_steps >= i_max_steps) //end of animation between frames?
+		{
+			playIndex++;
+			if (playIndex>FrameIndex - 2)	//end of total animation?
+			{
+				printf("termina anim\n");
+				playIndex = 0;
+				play = false;
+			}
+			else //Next frame interpolations
+			{
+				i_curr_steps = 0; //Reset counter
+								  //Interpolation
+
+								  //Interpolaciones incremento.
+								  //el incremento es la distancia entre dos cuadros, el 2 - 1 y se divide entre el 90(i_max_steps)   Se hace la interpolacion
+
+
+				
+				KeyFrame[playIndex].incpie = (KeyFrame[playIndex + 1].movpie - KeyFrame[playIndex].movpie) / i_max_steps;
+
+			}
+		}
+		else
+		{	//Draw information
+
+
+			
+			movpie += KeyFrame[playIndex].incpie;
+
+
+			i_curr_steps++;
+		}
+
+	}
+
+	frame++;
+	time = glutGet(GLUT_ELAPSED_TIME);
+	if (time - timebase > 1000) {
+		sprintf(s, "FPS:%4.2f", frame*1000.0 / (time - timebase));
+		timebase = time;
+		frame = 0;
+	}
+
+	glutPostRedisplay();
+}
+
+*/
 void reshape(int width, int height)   // Creamos funcion Reshape
 {
 	if (height == 0)										// Prevenir division entre cero
@@ -790,6 +1492,56 @@ void keyboard(unsigned char key, int x, int y)  // Create Keyboard Function
 	case 'D':
 		objCamera.Strafe_Camera(CAMERASPEED + 0.4);
 		break;
+
+	case 'M':
+	case 'm':
+		if (play == false && (FrameIndex>1) )
+		{
+
+			movhombro = KeyFrame[0].movhombro;
+
+
+			//First Interpolation
+
+
+			KeyFrame[playIndex].inchom = (KeyFrame[playIndex + 1].movhombro - KeyFrame[playIndex].movhombro) / i_max_steps;
+
+
+			play = true;
+			playIndex = 0;
+			i_curr_steps = 0;
+		}
+		else
+		{
+			play = false;
+		}
+		break;
+	case 'N':
+	case 'n':
+		if (play == false && (FrameIndex>1))
+		{
+
+			movpie = KeyFrame[4].movpie;
+
+
+			//First Interpolation
+
+
+			KeyFrame[playIndex].incpie = (KeyFrame[playIndex + 4].movpie - KeyFrame[playIndex].movpie) / i_max_steps;
+
+
+			play = true;
+			playIndex = 0;
+			i_curr_steps = 0;
+		}
+		else
+		{
+			play = false;
+		}
+		break;
+	
+
+		//break;
 
 	case 27:        // Cuando Esc es presionado...
 		exit(0);   // Salimos del programa
